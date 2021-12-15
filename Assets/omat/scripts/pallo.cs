@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon;
 using Photon.Pun;
 using TMPro;
-public class pallo : MonoBehaviourPun, IPunObservable
+public class pallo : MonoBehaviourPunCallbacks
+
 {
     // Start is called before the first frame update
 
@@ -15,6 +17,8 @@ public class pallo : MonoBehaviourPun, IPunObservable
     public TMP_Text tmtext;
     private static int Joukkue2_pisteet = 0;
     string pisteet_2 = "Joukkue 2 Pisteet: " + Joukkue2_pisteet;
+
+
 
     //private GUIStyle myStyle;
 
@@ -35,6 +39,7 @@ public class pallo : MonoBehaviourPun, IPunObservable
     {
         hahmokontrolleri = GetComponent<CharacterController>();
         rigidbody = GetComponent<Rigidbody>();
+        UpdateScoreText();
     }
 
     // Update is called once per frame
@@ -67,10 +72,12 @@ public class pallo : MonoBehaviourPun, IPunObservable
             print("Ykköset saivat maalin");
             
             Joukkue1_pisteet += 1;
-            pisteet_1 = "Joukkue 1 Pisteet: " + Joukkue1_pisteet;
+            //pisteet_1 = "Joukkue 1 Pisteet: " + Joukkue1_pisteet;
+            PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable() { { "BlueScore", Joukkue1_pisteet } });
 
-            Debug.Log(pisteet_1);
-            tmtext.text = pisteet_1;
+
+            //Debug.Log(pisteet_1);
+            //tmtext.text = pisteet_1;
 
 
             transform.position = aloituspaikka;
@@ -81,10 +88,11 @@ public class pallo : MonoBehaviourPun, IPunObservable
         {
             print("Kakkoset saivat maalin");
             Joukkue2_pisteet += 1;
-            pisteet_2 = "Joukkue 2 Pisteet: " + Joukkue2_pisteet;
+            //pisteet_2 = "Joukkue 2 Pisteet: " + Joukkue2_pisteet;
+            PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable() { { "PinkScore", Joukkue2_pisteet } });
 
-            Debug.Log(pisteet_2);
-            tmtext.text = pisteet_2;
+            //Debug.Log(pisteet_2);
+            //tmtext.text = pisteet_2;
 
             transform.position = aloituspaikka;
             rigidbody.velocity = Vector3.zero;
@@ -93,9 +101,31 @@ public class pallo : MonoBehaviourPun, IPunObservable
 
     }
 
-
-    void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    private void UpdateScoreText()
     {
+        Joukkue1_pisteet = (int)PhotonNetwork.CurrentRoom.CustomProperties["BlueScore"];
+        Joukkue2_pisteet = (int)PhotonNetwork.CurrentRoom.CustomProperties["PinkScore"];
+
+        pisteet_1 = "Joukkue 1 Pisteet: " + Joukkue1_pisteet;
+        pisteet_2 = "Joukkue 2 Pisteet: " + Joukkue2_pisteet;
+
+        Debug.Log(Joukkue1_pisteet);
+        Debug.Log(Joukkue2_pisteet);
+
+    }
+
+    public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
+    {
+        UpdateScoreText();
+    }
+
+
+    /*
+
+    //void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        Debug.Log("taala ollaan");
         if (stream.IsWriting)
         {
             stream.SendNext(Joukkue1_pisteet);
@@ -109,4 +139,5 @@ public class pallo : MonoBehaviourPun, IPunObservable
             Debug.Log(info);
         }
     }
+    */
 }

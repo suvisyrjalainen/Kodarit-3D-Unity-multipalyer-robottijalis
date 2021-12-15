@@ -4,6 +4,7 @@ using UnityEngine;
 //t‰m‰n avulla saadaan yhteys UI-elementteihin
 using UnityEngine.UI;
 using Photon.Pun;
+using Photon.Realtime;
 using TMPro;
 
 public class create_and_join_room : MonoBehaviourPunCallbacks
@@ -17,9 +18,14 @@ public class create_and_join_room : MonoBehaviourPunCallbacks
     //T‰t‰ funktiota kutsutaan create-napilla. luo meille pelihuoneen
     public void CreateRoom()
     {
-        // t‰ll‰ k‰skyll‰ luodaan uusi huone ja sulkujen sis‰‰n tulee huoneen nimi
-        // createInput sis‰lt‰‰ meid‰n uuden huoneen nimen. N‰in k‰ytt‰j‰ voi syˆtt‰‰ haluamansa nimen.
-        PhotonNetwork.CreateRoom(createInput.text);
+        RoomOptions roomOptions = new RoomOptions();
+        ExitGames.Client.Photon.Hashtable roomCustomProps = new ExitGames.Client.Photon.Hashtable();
+        roomCustomProps.Add("PinkScore", 0);
+        roomCustomProps.Add("BlueScore", 0);
+        roomOptions.CustomRoomProperties = roomCustomProps;
+        //T‰ll‰ k‰skyll‰ luodaan serverille uusi huone
+        PhotonNetwork.CreateRoom(createInput.text, roomOptions);
+
 
 
     }

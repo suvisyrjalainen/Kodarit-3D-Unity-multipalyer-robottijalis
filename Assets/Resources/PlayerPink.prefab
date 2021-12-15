@@ -1202,7 +1202,7 @@ GameObject:
   - component: {fileID: -3531504440069772173}
   - component: {fileID: -8123679250338457045}
   m_Layer: 8
-  m_Name: PlayerRed
+  m_Name: PlayerPink
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1280,7 +1280,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   canPush: 1
-  strength: 1.93
+  strength: 1.2
 --- !u!114 &25908922533341907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1293,9 +1293,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd503f35545e8b14da904833b8cfa744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nopeuskerroin: 1
+  nopeuskerroin: 2
   painovoima: 50
   jokuVaan: 1
+  potkuvoimakerroin: 3
 --- !u!114 &692413076338902433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2329,7 +2330,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 647a15fd55e623c40ae5fa4473fdef6b, type: 2}
+  - {fileID: 2100000, guid: 29308ba0e3d8e274d91eadf9311fff83, type: 2}
   - {fileID: 2100000, guid: 64578c3ecbabbae4787a5df12b1caa8d, type: 2}
   - {fileID: 2100000, guid: 64578c3ecbabbae4787a5df12b1caa8d, type: 2}
   m_StaticBatchInfo:

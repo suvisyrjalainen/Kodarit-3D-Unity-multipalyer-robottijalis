@@ -5,10 +5,17 @@ public class BasicRigidBodyPush : MonoBehaviour
 	public LayerMask pushLayers;
 	public bool canPush;
 	[Range(0.5f, 5f)] public float strength = 1.1f;
+	private float alkuperainenPotkuVoima = 1.1f;
 
+	private void Start()
+	{
+		alkuperainenPotkuVoima = strength;
+	}
 	private void OnControllerColliderHit(ControllerColliderHit hit)
 	{
+
 		if (canPush) PushRigidBodies(hit);
+		
 	}
 
 	private void PushRigidBodies(ControllerColliderHit hit)
@@ -31,5 +38,15 @@ public class BasicRigidBodyPush : MonoBehaviour
 
 		// Apply the push and take strength into account
 		body.AddForce(pushDir * strength, ForceMode.Impulse);
+
+	}
+
+	public void Potku(float potkuVoima)
+	{
+		strength = strength * potkuVoima;
+	}
+	public void PalautaVoima()
+	{
+		strength = alkuperainenPotkuVoima;
 	}
 }

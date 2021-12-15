@@ -950,9 +950,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd503f35545e8b14da904833b8cfa744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nopeuskerroin: 1
+  nopeuskerroin: 2
   painovoima: 50
   jokuVaan: 1
+  potkuvoimakerroin: 3
 --- !u!114 &320502056877954979
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using Photon.Pun;
 
 public class luo_pelaajia : MonoBehaviour
 {
-    public GameObject playerRed;
+    public GameObject playerPink;
     public GameObject playerBlue;
 
     public float minX;
@@ -25,7 +25,7 @@ public class luo_pelaajia : MonoBehaviour
         
         if (PhotonNetwork.LocalPlayer.ActorNumber % 2 == 0)
         {
-            PhotonNetwork.Instantiate(playerRed.name, spawnPosition, Quaternion.identity);
+            PhotonNetwork.Instantiate(playerPink.name, spawnPosition, Quaternion.identity);
         }
         else
         {
